@@ -1,0 +1,15 @@
+.shop {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    h1.title{
+        font-size: 32px;
+        font-weight: bolder;
+        align-self: start;
+        margin-bottom: 30px;
+    }
+
+    
+}
