@@ -22,13 +22,8 @@
              right: 0;
          }
 
-         .addToCart {
-             display: none;
-             padding:12px 25px;
-             background-color: white;
-             border:none;
-             border-radius: 4px;
-             outline: none;
+         .custom-button {
+             display: none; 
              position: absolute;
              bottom:40px;
              text-transform: uppercase;
@@ -37,8 +32,9 @@
 
          &:hover {
              opacity: .8;
-             .addToCart {
+             .custom-button {
                  display:block;
+                 opacity: 0.8;
              }
          }
      }

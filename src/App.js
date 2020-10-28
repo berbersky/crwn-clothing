@@ -1,11 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shoppage/shoppage.component";
 import Header from "./component/header/header.component";
+import SignInOut from "./pages/signin-signout-page/signin-signout-page.component";
 
 import "./App.css";
 
+import { auth } from "./firebase/firebase.utils";
 // function HatsPage(props) {
 // 	//let { pathname } = useLocation();
 // 	let { url } = useRouteMatch();
@@ -35,14 +37,37 @@ import "./App.css";
 // 	);
 // };
 
-const App = () => (
-	<div className="App">
-		<Header />
-		<Switch>
-			<Route path="/" exact component={HomePage} />
-			<Route path="/shop" exact component={ShopPage} />
-		</Switch>
-	</div>
-);
+class App extends Component {
+	constructor() {
+		super();
+		this.state = { currentUser: null };
+	}
+
+	unsubscribeFromAuth = null;
+
+	componentDidMount() {
+		this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+			this.setState({ currentUser: user });
+			console.log(user);
+		});
+	}
+
+	componentWillUnmount() {
+		this.unsubscribeFromAuth();
+	}
+
+	render() {
+		return (
+			<div className="App">
+				<Header currentUser={this.state.currentUser} />
+				<Switch>
+					<Route path="/" exact component={HomePage} />
+					<Route path="/shop" exact component={ShopPage} />
+					<Route path="/signin" exact component={SignInOut} />
+				</Switch>
+			</div>
+		);
+	}
+}
 
 export default App;
