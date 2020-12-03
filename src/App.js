@@ -7,7 +7,7 @@ import SignInOut from "./pages/signin-signout-page/signin-signout-page.component
 
 import "./App.css";
 
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 // function HatsPage(props) {
 // 	//let { pathname } = useLocation();
 // 	let { url } = useRouteMatch();
@@ -46,9 +46,29 @@ class App extends Component {
 	unsubscribeFromAuth = null;
 
 	componentDidMount() {
-		this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-			this.setState({ currentUser: user });
-			console.log(user);
+		this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+			if (userAuth) {
+				// null : when we signOut
+				const userRef = await createUserProfileDocument(userAuth); // a ref to users document in firestore
+				userRef.onSnapshot((snapShot) => {
+					//console.table("onSnapshot: ", snapShot.data());
+					this.setState(
+						{
+							currentUser: {
+								id: snapShot.id,
+								...snapShot.data(),
+							},
+						}
+						// () => {
+						// 	console.log(this.state);
+						// }
+					);
+				});
+			} //if
+			else {
+				this.setState({ currentUser: userAuth });
+				console.log("userAuth: ", userAuth);
+			}
 		});
 	}
 

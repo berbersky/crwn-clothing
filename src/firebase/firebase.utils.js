@@ -13,8 +13,34 @@ const config = {
 	measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+	if (!userAuth) return;
+	const userRef = firestore.doc(`users/${userAuth.uid}`);
+	const snapShot = await userRef.get();
+	//console.log(snapShot);
+	if (!snapShot.exists) {
+		const { displayName, email, photoURL } = userAuth;
+		const createAt = new Date();
+
+		try {
+			await userRef.set({
+				displayName,
+				email,
+				createAt,
+				photoURL,
+				...additionalData,
+			});
+		} catch (error) {
+			console.log("error creating user", error.message);
+		}
+	}
+	return userRef;
+};
+
 // Initialise the firebase
 firebase.initializeApp(config);
+
+//console.log("Config: ", config);
 // Selectionner le langage par defaut de l'utilisateur
 firebase.auth().useDeviceLanguage();
 // Select a methode of authantification

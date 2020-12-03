@@ -19,8 +19,16 @@ const Header = ({ currentUser }) => {
 					CONTACT
 				</Link>
 				{currentUser ? (
-					<div className="option" onClick={() => auth.signOut()}>
-						SIGN OUT
+					<div
+						className="profile"
+						style={{ backgroundImage: `url(${currentUser.photoURL})` }}
+						onClick={() => {
+							const option = document.querySelector(".profile>.option");
+							option.classList.toggle("active");
+						}}>
+						<div className="option" onClick={() => auth.signOut()}>
+							SIGN OUT
+						</div>
 					</div>
 				) : (
 					<Link to="/signin" className="option">

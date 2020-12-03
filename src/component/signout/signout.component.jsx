@@ -6,7 +6,7 @@
 
 // 		this.state = {
 // 			email: "",
-//             pasword: "",
+// 			pasword: "",
 // 		};
 // 	}
 // 	render() {

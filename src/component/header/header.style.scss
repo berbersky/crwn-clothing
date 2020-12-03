@@ -1,29 +1,79 @@
 .header {
+
     height: 70px;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
+    margin:auto;
+    color:#3f454d;
+    position: fixed;
+    z-index: 1000;
+    top:0;
+    left:0;right: 0;
+    padding:10px 60px 10px 50px;
+
+    background-image: repeating-linear-gradient(45deg, rgb(255, 255, 255) 0px, rgb(255, 255, 255) 10px, transparent 10px, transparent 11px),
+    repeating-linear-gradient(135deg, rgb(255, 255, 255) 0px, rgb(255, 255, 255) 10px, transparent 10px, transparent 11px),
+    linear-gradient(90deg, hsl(256, 7%, 84%), hsl(256, 7%, 84%));
 
     .logo-container {
         height: 100%;
         width: 90px;
-        padding: 25px;
-        
+        padding: 15px 20px 20px 20px;
+        display: grid;
+        place-items: center;
+        flex:0 0 90px;
     }
 
     .options {
-        width: 50%;
+        width: max-content;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-end;
 
-        .option {
+        >.option {
+            width: max-content;
             padding: 10px 15px;
             font-size: 22px;
             font-weight: 600;
+        }
 
+        .profile {
+            position:relative;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-color: crimson;
+            display: grid;
+            place-items: center;
+          
+            .option {
+               display:none; 
+               position:absolute;
+               top: 39px;
+               left: -5px;
+               font-size: 12px;
+               font-weight: 600;
+               width: max-content;
+               background-color: crimson;
+               color: white;
+               padding: 0 4px;
+               border-radius: 4px;
+            }
+
+            &:hover{
+               cursor: pointer;  
+               .option {display:block}
+                
+            }
         }
     }
+
+    
+    
 }
