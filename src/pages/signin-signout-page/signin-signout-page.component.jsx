@@ -3,7 +3,7 @@ import React from "react";
 import SignIn from "./../../component/signin/signin.component";
 import SignUp from "../../component/signup/signup.component";
 
-const SignInOut = () => {
+const SignInOutPage = () => {
 	return (
 		<div className="signInOut">
 			<SignIn />
@@ -12,4 +12,4 @@ const SignInOut = () => {
 	);
 };
 
-export default SignInOut;
+export default SignInOutPage;

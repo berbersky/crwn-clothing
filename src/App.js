@@ -1,13 +1,19 @@
+// Components
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shoppage/shoppage.component";
 import Header from "./component/header/header.component";
-import SignInOut from "./pages/signin-signout-page/signin-signout-page.component";
-
+import SignInOutPage from "./pages/signin-signout-page/signin-signout-page.component";
+//Routing
+import { Switch, Route, Redirect } from "react-router-dom";
+// Styling
 import "./App.css";
-
+//Firebase
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+// Redux
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/user/user.action";
+
 // function HatsPage(props) {
 // 	//let { pathname } = useLocation();
 // 	let { url } = useRouteMatch();
@@ -38,35 +44,30 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 // };
 
 class App extends Component {
-	constructor() {
-		super();
-		this.state = { currentUser: null };
-	}
+	// whith-out redux
+	// constructor() {
+	// 	super();
+	// 	this.state = { currentUser: null };
+	// }
 
 	unsubscribeFromAuth = null;
 
 	componentDidMount() {
+		const { setCurrentUser } = this.props;
 		this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
 			if (userAuth) {
 				// null : when we signOut
 				const userRef = await createUserProfileDocument(userAuth); // a ref to users document in firestore
 				userRef.onSnapshot((snapShot) => {
 					//console.table("onSnapshot: ", snapShot.data());
-					this.setState(
-						{
-							currentUser: {
-								id: snapShot.id,
-								...snapShot.data(),
-							},
-						}
-						// () => {
-						// 	console.log(this.state);
-						// }
-					);
+					setCurrentUser({
+						id: snapShot.id,
+						...snapShot.data(),
+					});
 				});
 			} //if
 			else {
-				this.setState({ currentUser: userAuth });
+				setCurrentUser(userAuth);
 				console.log("userAuth: ", userAuth);
 			}
 		});
@@ -79,15 +80,30 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Header currentUser={this.state.currentUser} />
+				{/*  whith out redux <Header currentUser={this.state.currentUser} /> */}
+				{/* whith redux */}
+				<Header />
 				<Switch>
 					<Route path="/" exact component={HomePage} />
 					<Route path="/shop" exact component={ShopPage} />
-					<Route path="/signin" exact component={SignInOut} />
+					<Route
+						exact
+						path="/signin"
+						render={() =>
+							this.props.currentUser ? <Redirect to="/" /> : <SignInOutPage />
+						}
+					/>
 				</Switch>
 			</div>
 		);
 	}
 }
 
-export default App;
+const mapStateToProps = ({ user }) => ({
+	currentUser: user.currentUser,
+});
+const mapDispatchProps = (dispatch) => ({
+	setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchProps)(App);
