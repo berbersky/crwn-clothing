@@ -37,7 +37,7 @@
             width: max-content;
             padding: 10px 15px;
             font-size: 22px;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .profile {
@@ -51,6 +51,7 @@
             background-color: crimson;
             display: grid;
             place-items: center;
+            margin: 10px 15px;
           
             .option {
                display:none; 

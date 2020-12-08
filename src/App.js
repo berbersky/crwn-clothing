@@ -1,11 +1,13 @@
-// Components
 import React, { Component } from "react";
-import HomePage from "./pages/homepage/homepage.component";
-import ShopPage from "./pages/shoppage/shoppage.component";
-import Header from "./component/header/header.component";
-import SignInOutPage from "./pages/signin-signout-page/signin-signout-page.component";
 //Routing
 import { Switch, Route, Redirect } from "react-router-dom";
+//Componets
+import Header from "./component/header/header.component";
+//Pages
+import HomePage from "./pages/homepage/homepage.component";
+import ShopPage from "./pages/shoppage/shoppage.component";
+import SignInOutPage from "./pages/signin-signout-page/signin-signout-page.component";
+
 // Styling
 import "./App.css";
 //Firebase
