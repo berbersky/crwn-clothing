@@ -1,7 +1,7 @@
 .cart-dropdown {
     position: absolute;
     right:20px;
-    top:80px;
+    top:70px;
     width:240px;
     height: 340px;
     z-index:5;
@@ -13,14 +13,19 @@
     background-color: white;
     cursor:default;
 
-
-    .cart-items {
-        
+    .cart-items {      
         height: 240px;
         margin-bottom: 10px;
-        overflow-y: scroll;
+        overflow-y: auto;
         display:flex;
         flex-direction: column;
+       
+        .empty-message{
+            font-weight: 400;
+            display: grid;
+            place-items: center;
+            padding-top: calc((240px - 50px)/2);
+        }
     }
 
     .custom-button {

@@ -4,10 +4,12 @@ import { Switch, Route, Redirect } from "react-router-dom";
 //Componets
 import Header from "./component/header/header.component";
 //Pages
-import HomePage from "./pages/homepage/homepage.component";
-import ShopPage from "./pages/shoppage/shoppage.component";
-import SignInOutPage from "./pages/signin-signout-page/signin-signout-page.component";
-
+// import HomePage from "./pages/homepage/homepage.component";
+// import ShopPage from "./pages/shoppage/shoppage.component";
+// import SignInOutPage from "./pages/signin-signout-page/signin-signout-page.component";
+// import CheckoutPage from "./pages/checkout/checkout.component";
+// import FormBase from "./pages/form/formBase";
+import * as Routes from "./pages/Route";
 // Styling
 import "./App.css";
 //Firebase
@@ -86,15 +88,21 @@ class App extends Component {
 				{/* whith redux */}
 				<Header />
 				<Switch>
-					<Route path="/" exact component={HomePage} />
-					<Route path="/shop" exact component={ShopPage} />
+					<Route path="/" exact component={Routes.HomePage} />
+					<Route path="/shop" exact component={Routes.ShopPage} />
 					<Route
 						exact
 						path="/signin"
 						render={() =>
-							this.props.currentUser ? <Redirect to="/" /> : <SignInOutPage />
+							this.props.currentUser ? (
+								<Redirect to="/" />
+							) : (
+								<Routes.SignInOutPage />
+							)
 						}
 					/>
+					<Route path="/checkout" exact component={Routes.CheckoutPage} />
+					<Route path="/login" exact component={Routes.FormBase} />
 				</Switch>
 			</div>
 		);

@@ -1,0 +1,14 @@
+.checkout-page{
+    margin:auto;
+    margin-top:70px;
+    width: 88%;
+    
+    .checkout-header{
+        display: flex;
+        justify-content: space-between;
+        font-variant: small-caps;
+        font-weight: 600;
+        background-color: rgb(255, 252, 252);
+        padding:10px 16px ;
+    }
+}

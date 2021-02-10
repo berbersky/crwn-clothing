@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@loadable/component": "^5.14.1",
     "chokidar": "^3.4.3",
     "firebase": "^8.0.0",
+    "firebase-tools": "^9.3.0",
     "history": "^5.0.0-beta.9",
     "node-sass": "^4.14.1",
     "react": "^17",
     "react-dom": "^17",
+    "react-hook-form": "^6.14.2",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
     "redux": "^4.0.5",
-    "redux-logger": "^4.0.0"
+    "redux-logger": "^4.0.0",
+    "reselect": "^4.0.0"
   },
   "optionalDependencies": {
     "fsevents": "*"
